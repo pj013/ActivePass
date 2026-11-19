@@ -1,0 +1,15 @@
+com\example\app\controller\DashboardControllers.class
+com\example\app\dto\LoginRequest.class
+com\example\app\model\User.class
+com\example\app\dto\RegisterRequest.class
+com\example\app\dto\UserResponse.class
+com\example\app\config\SecurityConfig.class
+com\example\app\repository\UserRepository.class
+com\example\app\controller\DashboardControllers$OrganizerController.class
+com\example\app\controller\AuthController.class
+com\example\app\config\DataSeeder.class
+com\example\app\controller\DashboardControllers$StudentController.class
+com\example\app\AppApplication.class
+com\example\app\security\CustomUserDetailsService.class
+com\example\app\controller\DashboardControllers$AdminController.class
+com\example\app\model\Role.class
