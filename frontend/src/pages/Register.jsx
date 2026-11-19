@@ -5,7 +5,7 @@ import { useAuth } from "../AuthContext";
 export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ fullName: "", email: "", password: "", role: "STUDENT" });
+  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", password: "", role: "STUDENT" });
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -16,7 +16,13 @@ export default function Register() {
     setError("");
     setSubmitting(true);
     try {
-      await register(form);
+      const { firstName, lastName, email, password, role } = form;
+      await register({
+        fullName: `${firstName.trim()} ${lastName.trim()}`,
+        email,
+        password,
+        role,
+      });
       navigate("/login", { state: { message: "Registration successful. Please log in." } });
     } catch (err) {
       setError(err.message);
@@ -31,8 +37,12 @@ export default function Register() {
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Full name</label><br />
-          <input name="fullName" value={form.fullName} onChange={update} required />
+          <label>First Name</label><br />
+          <input name="firstName" autoComplete="given-name" value={form.firstName} onChange={update} required />
+        </div>
+        <div>
+          <label>Last Name</label><br />
+          <input name="lastName" autoComplete="family-name" value={form.lastName} onChange={update} required />
         </div>
         <div>
           <label>Email</label><br />
