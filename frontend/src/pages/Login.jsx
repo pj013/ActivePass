@@ -28,22 +28,29 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      {location.state?.message && <p>{location.state.message}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label><br />
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+    <main className="auth-page">
+      <section className="auth-card">
+        <div className="brand-lockup">
+          <span className="brand-mark" aria-hidden="true">A</span>
+          <span>ActivePass</span>
         </div>
-        <div>
-          <label>Password</label><br />
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <button type="submit" disabled={submitting}>{submitting ? "Logging in..." : "Login"}</button>
-      </form>
-      <p>No account? <Link to="/register">Register</Link></p>
-    </div>
+        <p className="auth-eyebrow">WELCOME BACK</p>
+        <h1>Login</h1>
+        {location.state?.message && <p className="notice notice-success">{location.state.message}</p>}
+        {error && <p className="notice notice-error" role="alert">{error}</p>}
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-field">
+            <label htmlFor="email">Email</label>
+            <input id="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </div>
+          <div className="form-field">
+            <label htmlFor="password">Password</label>
+            <input id="password" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          <button className="primary-button" type="submit" disabled={submitting}>{submitting ? "Logging in..." : "Login"}</button>
+        </form>
+        <p className="auth-footer">No account? <Link to="/register">Register</Link></p>
+      </section>
+    </main>
   );
 }

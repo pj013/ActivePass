@@ -20,19 +20,40 @@ export default function Dashboard({ title, apiPath }) {
   };
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <p>Logged in as {user.fullName} ({user.email}), role: {user.role}</p>
-      <button onClick={handleLogout}>Logout</button>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {data && (
-        <>
-          <h3>Menu</h3>
-          <ul>{data.menu.map((item) => <li key={item}>{item}</li>)}</ul>
-          <p>{data.message}</p>
-        </>
-      )}
+    <div className="dashboard-page">
+      <header className="dashboard-topbar">
+        <div className="brand-lockup">
+          <span className="brand-mark" aria-hidden="true">A</span>
+          <span>ActivePass</span>
+        </div>
+      </header>
+      <main className="dashboard-main">
+        <div className="dashboard-heading">
+          <div>
+            <p className="dashboard-eyebrow">YOUR WORKSPACE</p>
+            <h1>{title}</h1>
+          </div>
+          <button className="secondary-button" onClick={handleLogout}>Logout</button>
+        </div>
+        <section className="dashboard-card">
+          <div className="profile-card">
+            <span className="profile-avatar" aria-hidden="true">{user.fullName.charAt(0).toUpperCase()}</span>
+            <div className="profile-details">
+              <strong>{user.fullName}</strong>
+              <p>{user.email}</p>
+            </div>
+            <span className="role-badge">{user.role}</span>
+          </div>
+          {error && <p className="notice notice-error" role="alert">{error}</p>}
+          {data && (
+            <div className="dashboard-content">
+              <h2>Menu</h2>
+              <ul className="dashboard-menu">{data.menu.map((item) => <li key={item}>{item}</li>)}</ul>
+              <p className="dashboard-message">{data.message}</p>
+            </div>
+          )}
+        </section>
+      </main>
     </div>
   );
 }
