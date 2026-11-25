@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../auth-context";
 
 export default function Login() {
   const { user, login } = useAuth();
@@ -47,6 +47,7 @@ export default function Login() {
             <label htmlFor="password">Password</label>
             <input id="password" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
+          <p className="form-assist"><Link to="/forgot-password">Forgot password?</Link></p>
           <button className="primary-button" type="submit" disabled={submitting}>{submitting ? "Logging in..." : "Login"}</button>
         </form>
         <p className="auth-footer">No account? <Link to="/register">Register</Link></p>
