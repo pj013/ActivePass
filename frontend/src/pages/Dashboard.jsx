@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../auth-context";
 
 // One component reused by all three roles; apiPath decides which backend endpoint it calls
 export default function Dashboard({ title, apiPath }) {
@@ -37,11 +37,13 @@ export default function Dashboard({ title, apiPath }) {
         </div>
         <section className="dashboard-card">
           <div className="profile-card">
-            <span className="profile-avatar" aria-hidden="true">{user.fullName.charAt(0).toUpperCase()}</span>
-            <div className="profile-details">
-              <strong>{user.fullName}</strong>
-              <p>{user.email}</p>
-            </div>
+            <Link className="profile-link" to="/profile" aria-label={`View profile for ${user.fullName}`}>
+              <span className="profile-avatar" aria-hidden="true">{user.fullName.charAt(0).toUpperCase()}</span>
+              <span className="profile-details">
+                <strong>{user.fullName}</strong>
+                <span>{user.email}</span>
+              </span>
+            </Link>
             <span className="role-badge">{user.role}</span>
           </div>
           {error && <p className="notice notice-error" role="alert">{error}</p>}

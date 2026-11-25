@@ -1,8 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { AuthContext } from "./auth-context";
 import { api } from "./api";
-
-const AuthContext = createContext(null);
-export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -24,12 +22,21 @@ export function AuthProvider({ children }) {
 
   const register = (data) => api("/api/auth/register", { method: "POST", body: data });
 
+  const updateProfile = async (data) => {
+    const updatedUser = await api("/api/auth/profile", { method: "PUT", body: data });
+    setUser(updatedUser);
+    return updatedUser;
+  };
+
+  const changePassword = (data) =>
+    api("/api/auth/change-password", { method: "POST", body: data });
+
   const logout = async () => {
     try { await api("/api/auth/logout", { method: "POST" }); } finally { setUser(null); }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, updateProfile, changePassword, logout }}>
       {children}
     </AuthContext.Provider>
   );

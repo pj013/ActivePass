@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../auth-context";
 
 // roles = array of allowed roles, e.g. ["STUDENT"]
 export default function ProtectedRoute({ roles, children }) {
