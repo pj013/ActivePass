@@ -62,7 +62,8 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .sessionFixation(f -> f.changeSessionId()))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/csrf").permitAll()
+                .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/csrf",
+                        "/api/auth/forgot-password", "/api/auth/reset-password").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/student/**").hasRole("STUDENT")
                 .requestMatchers("/api/organizer/**").hasRole("ORGANIZER")
